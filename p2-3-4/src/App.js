@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
+import Home from "./pages/Home";
+import Customers from "./pages/Customers";
 
 function App() {
+  const navStyle = ({ isActive }) => ({
+    margin: "10px",
+    padding: "10px",
+    textDecoration: "none",
+    backgroundColor: isActive ? "lightblue" : "lightgray",
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <nav>
+        <NavLink to="/" style={navStyle}>
+          Home
+        </NavLink>
+        <NavLink to="/customers" style={navStyle}>
+          Customers
+        </NavLink>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/customers/*" element={<Customers />} />
+      </Routes>
+    </Router>
   );
 }
 
